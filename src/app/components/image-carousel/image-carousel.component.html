@@ -1,0 +1,35 @@
+<div class="relative w-full h-48 overflow-hidden rounded-t-lg">
+  <!-- Images -->
+  <div class="relative h-full">
+    <img *ngFor="let img of images; let i = index"
+         [src]="img"
+         [class.hidden]="i !== currentIndex"
+         class="w-full h-full object-cover transition-opacity duration-300"
+         alt="Project image">
+  </div>
+
+  <!-- Navigation buttons -->
+  <button *ngIf="images.length > 1"
+          (click)="prev()"
+          class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+    </svg>
+  </button>
+
+  <button *ngIf="images.length > 1"
+          (click)="next()"
+          class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+    </svg>
+  </button>
+
+  <!-- Dots indicator -->
+  <div *ngIf="images.length > 1" class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2">
+    <button *ngFor="let img of images; let i = index"
+            (click)="goToSlide(i)"
+            [class]="i === currentIndex ? 'w-2 h-2 bg-white' : 'w-2 h-2 bg-white/50'"
+            class="rounded-full transition-all"></button>
+  </div>
+</div>
