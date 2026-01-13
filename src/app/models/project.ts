@@ -6,5 +6,5 @@ export interface Project {
     link: string;
     technologies: string[];
     featured?: boolean;
-    images?: string[];
+    images: string[];
 }

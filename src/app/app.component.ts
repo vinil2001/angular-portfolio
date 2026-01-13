@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { PortfolioComponent } from './features/portfolio/portfolio.component';
+import { RouterOutlet, RouterLink } from '@angular/router';
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [PortfolioComponent, ThemeToggleComponent],
+  imports: [RouterOutlet, RouterLink, ThemeToggleComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

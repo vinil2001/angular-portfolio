@@ -1,0 +1,23 @@
+/* Project detail styles */
+:host {
+  display: block;
+}
+
+section {
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+}
+
+.dark section {
+  border-bottom-color: #374151;
+}
+
+section:last-child {
+  border-bottom: none;
+}
+
+.sticky {
+  position: sticky;
+  top: 2rem;
+}

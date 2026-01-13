@@ -1,6 +1,6 @@
 <div class="project-card bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group flex flex-col h-full border border-gray-200 dark:border-gray-600">
   <!-- Image Carousel -->
-  <app-image-carousel [images]="project.images || []"></app-image-carousel>
+  <app-image-carousel [images]="project.images" height="h-48" [showPreview]="false"></app-image-carousel>
   
   <div class="p-6 flex flex-col flex-grow">
     <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
@@ -18,8 +18,7 @@
       </span>
     </div>
     
-    <a *ngIf="project.link !== '#'" 
-       [href]="project.link" 
+    <a routerLink="/project/{{ project.id }}" 
        class="inline-flex items-center gap-2 font-medium text-white px-4 py-2 rounded-lg transition-all duration-300 hover:transform hover:translate-y-[-2px]"
        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);">
       <span>View Project</span>
