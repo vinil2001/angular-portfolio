@@ -9,7 +9,6 @@ permissions:
   contents: read
   pages: write
   id-token: write
-  deployments: write
 
 concurrency:
   group: "pages"
@@ -44,6 +43,7 @@ jobs:
       uses: actions/upload-pages-artifact@v3
       with:
         path: ./dist/angular-portfolio
+        retention-days: 1
 
   deploy:
     environment:
