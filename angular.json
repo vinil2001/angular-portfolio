@@ -69,7 +69,8 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/angular-portfolio/"
             },
             "development": {
               "optimization": false,
