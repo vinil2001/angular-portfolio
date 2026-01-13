@@ -25,15 +25,46 @@
   --shadow-xl: 0 20px 60px rgb(0 0 0 / 0.3);
 }
 
+.dark {
+  --surface: #1a1a1a;
+  --surface-2: #2d2d2d;
+  --text: #ffffff;
+  --text-2: #a0a0a0;
+  --border: #404040;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+  --shadow-xl: 0 20px 60px rgb(0 0 0 / 0.7);
+}
+
+/* Dark mode card enhancements */
+.dark .project-card {
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  box-shadow: 
+    0 10px 15px -3px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--surface);
+  background-image: 
+    linear-gradient(rgba(102, 126, 234, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(102, 126, 234, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
   color: var(--text);
   line-height: 1.6;
   min-height: 100vh;
   padding: 20px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background-image: 
+    linear-gradient(rgba(0, 212, 255, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.15) 1px, transparent 1px);
 }
 
 /* CV Style Components */
@@ -145,14 +176,26 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--dark-bg);
+  background: #ffffff;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1a1a1a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--tron-blue);
+  background: var(--primary);
   border-radius: 4px;
 }
 
+.dark ::-webkit-scrollbar-thumb {
+  background: #00d4ff;
+}
+
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--tron-cyan);
+  background: var(--primary-dark);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #00a8cc;
 }

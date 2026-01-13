@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Project } from '../../models/project';
 
 @Injectable({
@@ -7,10 +8,50 @@ import { Project } from '../../models/project';
 })
 export class Portfolio {
     private projects$ = new BehaviorSubject<Project[]>([]);
+    private filterSubject$ = new BehaviorSubject<string[]>([]);
 
   //Get all projects
   getProjects() {
     return this.projects$.asObservable();
+  }
+
+  //Get filtered projects
+  getFilteredProjects(): Observable<Project[]> {
+    return this.projects$.pipe(
+      map(projects => {
+        const activeFilters = this.filterSubject$.value;
+        if (activeFilters.length === 0) {
+          return projects;
+        }
+        return projects.filter(project => 
+          activeFilters.some(filter => 
+            project.technologies.some(tech => 
+              tech.toLowerCase().includes(filter.toLowerCase())
+            )
+          )
+        );
+      })
+    );
+  }
+
+  //Get all unique technologies
+  getAllTechnologies(): Observable<string[]> {
+    return this.projects$.pipe(
+      map(projects => {
+        const allTechs = projects.flatMap(p => p.technologies);
+        return Array.from(new Set(allTechs)).sort();
+      })
+    );
+  }
+
+  //Filter projects by technologies
+  filterByTechnologies(technologies: string[]) {
+    this.filterSubject$.next(technologies);
+  }
+
+  //Get active filters
+  getActiveFilters(): Observable<string[]> {
+    return this.filterSubject$.asObservable();
   }
 
   //Add project

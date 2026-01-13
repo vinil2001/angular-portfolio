@@ -1,12 +1,12 @@
-<div class="project-card bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group flex flex-col h-full">
+<div class="project-card bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group flex flex-col h-full border border-gray-200 dark:border-gray-600">
   <!-- Image Carousel -->
   <app-image-carousel [images]="project.images || []"></app-image-carousel>
   
   <div class="p-6 flex flex-col flex-grow">
-    <h3 class="text-xl font-semibold mb-3" style="color: #333;">
+    <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
       {{ project.title }}
     </h3>
-    <p class="text-gray-600 mb-6 leading-relaxed flex-grow">
+    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed flex-grow">
       {{ project.description }}
     </p>
     
@@ -27,7 +27,7 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
       </svg>
     </a>
-    <span *ngIf="project.link === '#'" class="text-gray-400 text-sm">
+    <span *ngIf="project.link === '#'" class="text-gray-400 dark:text-gray-500 text-sm">
       Coming soon
     </span>
   </div>

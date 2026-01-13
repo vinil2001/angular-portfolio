@@ -1,5 +1,5 @@
 <div class="max-w-1000px mx-auto fade-in">
-  <div class="bg-white rounded-lg shadow-xl overflow-hidden border-t-0 border-l-0 border-r-0 border-b-4 border-[#667eea]">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden border-t-0 border-l-0 border-r-0 border-b-4 border-[#667eea] dark:border-[#00d4ff]">
     <div class="bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white p-8 text-center">
       <h1 class="text-4xl font-bold mb-2">
         My Portfolio
@@ -10,13 +10,27 @@
     </div>
     
     <div class="p-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <app-project-card 
-          *ngFor="let project of projects$ | async" 
-          [project]="project"
-          class="h-full">
-        </app-project-card>
-      </div>
+      <app-tech-filter></app-tech-filter>
+      
+      <ng-container *ngIf="projects$ | async as projects">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <app-project-card 
+            *ngFor="let project of projects" 
+            [project]="project"
+            class="h-full">
+          </app-project-card>
+        </div>
+        
+        <div *ngIf="projects.length === 0" class="text-center py-12">
+          <p class="text-gray-500 dark:text-gray-400 text-lg">
+            No projects found matching your filters.
+          </p>
+          <button (click)="clearFilters()" 
+                  class="mt-4 px-6 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg transition-colors">
+            Clear filters
+          </button>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>
