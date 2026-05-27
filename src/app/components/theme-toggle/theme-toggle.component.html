@@ -1,30 +1,18 @@
-<button (click)="toggleTheme()" 
-        class="group relative inline-flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 hover:scale-110"
-        [class.bg-gray-800]="darkMode$ | async"
-        [class.bg-gray-200]="!(darkMode$ | async)">
-  
-  <!-- Sun icon for light mode -->
-  <svg *ngIf="!(darkMode$ | async)" 
-       class="w-6 h-6 text-yellow-500" 
-       fill="currentColor" 
-       viewBox="0 0 20 20">
-    <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+<button
+  (click)="toggleTheme()"
+  type="button"
+  class="theme-toggle"
+  [attr.aria-label]="(darkMode$ | async) ? 'Switch to light theme' : 'Switch to dark theme'"
+  title="Toggle theme">
+  <!-- Sun (shown in dark mode → click for light) -->
+  <svg *ngIf="darkMode$ | async" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
   </svg>
-  
-  <!-- Moon icon for dark mode -->
-  <svg *ngIf="darkMode$ | async" 
-       class="w-6 h-6 text-blue-300" 
-       fill="currentColor" 
-       viewBox="0 0 20 20">
-    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+  <!-- Moon (shown in light mode → click for dark) -->
+  <svg *ngIf="!(darkMode$ | async)" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
   </svg>
-  
-  <!-- Tooltip -->
-  <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-medium px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap"
-        [class.bg-gray-800]="darkMode$ | async"
-        [class.text-white]="darkMode$ | async"
-        [class.bg-gray-200]="!(darkMode$ | async)"
-        [class.text-gray-800]="!(darkMode$ | async)">
-    {{ (darkMode$ | async) ? 'Dark mode' : 'Light mode' }}
-  </span>
 </button>

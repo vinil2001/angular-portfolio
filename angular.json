@@ -71,7 +71,7 @@
                 }
               ],
               "outputHashing": "all",
-              "baseHref": "/"
+              "baseHref": "/angular-portfolio/"
             },
             "development": {
               "optimization": false,

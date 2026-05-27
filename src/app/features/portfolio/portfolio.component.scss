@@ -1,1 +1,248 @@
-/* Portfolio component styles */
+:host {
+  display: block;
+}
+
+/* ---- Section scaffolding ------------------------------------------------- */
+.section {
+  padding-top: 4.5rem;
+  scroll-margin-top: 5.5rem;
+}
+
+.section-head {
+  margin-bottom: 2.5rem;
+}
+
+.section-title {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  margin: 0.5rem 0 0;
+}
+
+/* ---- Hero ---------------------------------------------------------------- */
+.hero {
+  padding-top: 5rem;
+  padding-bottom: 1rem;
+}
+
+.hero-inner {
+  max-width: 56rem;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-2);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  margin-bottom: 1.75rem;
+}
+
+.status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 var(--accent-glow);
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%   { box-shadow: 0 0 0 0 var(--accent-glow); }
+  70%  { box-shadow: 0 0 0 8px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+.hero-title {
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  margin: 1rem 0 0;
+}
+
+.hero-lead {
+  margin: 1.5rem 0 0;
+  max-width: 40rem;
+  font-size: 1.1rem;
+  color: var(--text-2);
+}
+
+.hero-lead strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 2.25rem;
+}
+
+.hero-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 2.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---- Experience timeline ------------------------------------------------- */
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.xp {
+  padding: 1.75rem;
+  overflow: hidden;
+}
+
+.xp-marker {
+  position: absolute;
+  top: 1.9rem;
+  left: 0;
+  width: 3px;
+  height: 1.4rem;
+  border-radius: 0 3px 3px 0;
+  background: var(--accent);
+}
+
+.xp-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.xp-role {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.xp-company {
+  margin: 0.35rem 0 0;
+  color: var(--text-2);
+  font-size: 0.95rem;
+}
+
+.xp-company-name {
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+.xp-dot {
+  margin: 0 0.5rem;
+  color: var(--text-3);
+}
+
+.xp-meta {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.xp-period {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text);
+}
+
+.now-badge {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-text);
+}
+
+.xp-loc {
+  font-size: 0.82rem;
+  color: var(--text-3);
+}
+
+.xp-summary {
+  margin: 1.25rem 0 0;
+  color: var(--text-2);
+}
+
+.xp-highlights {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.xp-highlights li {
+  position: relative;
+  padding-left: 1.5rem;
+  color: var(--text-2);
+  font-size: 0.95rem;
+}
+
+.xp-highlights li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.xp-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1.5rem;
+}
+
+/* ---- Projects grid ------------------------------------------------------- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.state-panel {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: var(--text-2);
+  display: grid;
+  gap: 1.25rem;
+  justify-items: center;
+}
+
+.skeleton-card {
+  height: 340px;
+  border-radius: 1rem;
+  border: 1px solid var(--card-border);
+  background: linear-gradient(100deg, var(--surface) 30%, var(--surface-2) 50%, var(--surface) 70%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+@media (max-width: 640px) {
+  .xp-meta { text-align: left; }
+}

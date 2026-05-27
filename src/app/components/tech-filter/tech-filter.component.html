@@ -1,36 +1,22 @@
-<div class="mb-8">
-  <ng-container *ngIf="activeFilters$ | async as activeFilters">
-    <div class="flex items-center justify-between mb-4">
-      <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
-        Filter by Technology
-      </h2>
-      <button *ngIf="activeFilters.length > 0" 
-              (click)="clearFilters()"
-              class="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors">
-        Clear all
-      </button>
-    </div>
-    
-    <div class="flex flex-wrap gap-2">
-      <ng-container *ngFor="let tech of technologies$ | async">
-        <button (click)="toggleTech(tech)"
-                class="px-4 py-2 rounded-full text-sm font-medium transition-all"
-                [class.bg-gray-100]="!activeFilters.includes(tech)"
-                [class.dark:bg-gray-700]="!activeFilters.includes(tech)"
-                [class.text-gray-700]="!activeFilters.includes(tech)"
-                [class.dark:text-gray-300]="!activeFilters.includes(tech)"
-                [class.hover:bg-gray-200]="!activeFilters.includes(tech)"
-                [class.dark:hover:bg-gray-600]="!activeFilters.includes(tech)"
-                [class.text-white]="activeFilters.includes(tech)"
-                [style.background-color]="activeFilters.includes(tech) ? '#667eea' : ''">
-          {{ tech }}
-          <span *ngIf="activeFilters.includes(tech)" class="ml-2 text-xs">✕</span>
-        </button>
-      </ng-container>
-    </div>
-    
-    <div *ngIf="activeFilters.length > 0" class="mt-4 text-sm text-gray-500 dark:text-gray-400">
-      Showing projects with: {{ activeFilters.join(', ') }}
-    </div>
-  </ng-container>
+<div class="filter" *ngIf="technologies.length > 0">
+  <div class="filter-head">
+    <span class="filter-label">Filter by tech</span>
+    <button *ngIf="active.length > 0" type="button" class="filter-clear" (click)="clear.emit()">
+      Clear ({{ active.length }})
+    </button>
+  </div>
+
+  <div class="filter-chips">
+    <button
+      *ngFor="let tech of technologies"
+      type="button"
+      class="chip"
+      [class.chip--active]="isActive(tech)"
+      (click)="toggle.emit(tech)">
+      {{ tech }}
+      <svg *ngIf="isActive(tech)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="12" height="12">
+        <path d="M18 6 6 18M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
 </div>

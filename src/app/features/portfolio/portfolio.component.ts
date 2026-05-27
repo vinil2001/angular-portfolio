@@ -1,31 +1,71 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AsyncPipe } from '@angular/common';
-import { Observable } from 'rxjs';
-import { Project } from '../../models/project';
-import { Portfolio } from '../../core/services/portfolio';
+import { RouterLink } from '@angular/router';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Project } from '../../models/project.model';
+import { FirebaseService } from '../../services/firebase.service';
 import { ProjectCardComponent } from './components/project-card/project-card.component';
 import { TechFilterComponent } from '../../components/tech-filter/tech-filter.component';
+import { Experience } from '../../models/experience.model';
+import { EXPERIENCE } from '../../data/experience.data';
+
+interface PortfolioView {
+  technologies: string[];
+  active: string[];
+  projects: Project[];
+}
 
 @Component({
   selector: 'app-portfolio',
   standalone: true,
-  imports: [CommonModule, AsyncPipe, ProjectCardComponent, TechFilterComponent],
+  imports: [CommonModule, AsyncPipe, RouterLink, ProjectCardComponent, TechFilterComponent],
   templateUrl: './portfolio.component.html',
   styleUrl: './portfolio.component.scss'
 })
 export class PortfolioComponent implements OnInit {
-  projects$!: Observable<Project[]>;
-  activeFilters$!: Observable<string[]>;
+  vm$!: Observable<PortfolioView>;
+  experience: Experience[] = EXPERIENCE;
 
-  constructor(private portfolio: Portfolio) {}
+  readonly stack = ['.NET', 'C#', 'Umbraco', 'Azure', 'ASP.NET Core', 'Next.js', 'Angular', 'TypeScript'];
+
+  private activeFilters$ = new BehaviorSubject<string[]>([]);
+
+  constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit() {
-    this.projects$ = this.portfolio.getFilteredProjects();
-    this.activeFilters$ = this.portfolio.getActiveFilters();
+    this.vm$ = combineLatest([
+      this.firebaseService.getProjects(),
+      this.activeFilters$
+    ]).pipe(
+      map(([projects, active]) => ({
+        technologies: this.collectTechnologies(projects),
+        active,
+        projects: this.applyFilters(projects, active)
+      }))
+    );
+  }
+
+  toggleTech(tech: string): void {
+    const current = this.activeFilters$.value;
+    this.activeFilters$.next(
+      current.includes(tech) ? current.filter(t => t !== tech) : [...current, tech]
+    );
   }
 
   clearFilters(): void {
-    this.portfolio.filterByTechnologies([]);
+    this.activeFilters$.next([]);
+  }
+
+  private collectTechnologies(projects: Project[]): string[] {
+    return Array.from(new Set(projects.flatMap(p => p.technologies ?? []))).sort();
+  }
+
+  private applyFilters(projects: Project[], active: string[]): Project[] {
+    if (active.length === 0) {
+      return projects;
+    }
+    return projects.filter(p => active.every(tech => (p.technologies ?? []).includes(tech)));
   }
 }

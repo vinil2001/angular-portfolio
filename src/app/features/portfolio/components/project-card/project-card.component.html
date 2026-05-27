@@ -1,33 +1,23 @@
-<div class="project-card bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group flex flex-col h-full border border-gray-200 dark:border-gray-600">
-  <!-- Image Carousel -->
-  <app-image-carousel [images]="project.images" height="h-48" [showPreview]="false"></app-image-carousel>
-  
-  <div class="p-6 flex flex-col flex-grow">
-    <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
-      {{ project.title }}
-    </h3>
-    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed flex-grow">
-      {{ project.description }}
-    </p>
-    
-    <div class="flex flex-wrap gap-2 mb-6">
-      <span *ngFor="let tech of project.technologies" 
-            class="px-3 py-1 rounded-full text-xs font-medium text-white"
-            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-        {{ tech }}
-      </span>
+<article class="card project-card">
+  <a class="project-link-wrap" routerLink="/project/{{ project.id }}" [attr.aria-label]="'View ' + project.title">
+    <div class="project-media">
+      <app-image-carousel [images]="project.images || []" height="h-52" [showPreview]="false"></app-image-carousel>
     </div>
-    
-    <a routerLink="/project/{{ project.id }}" 
-       class="inline-flex items-center gap-2 font-medium text-white px-4 py-2 rounded-lg transition-all duration-300 hover:transform hover:translate-y-[-2px]"
-       style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);">
-      <span>View Project</span>
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+  </a>
+
+  <div class="project-body">
+    <h3 class="project-title">{{ project.title }}</h3>
+    <p class="project-desc">{{ project.description }}</p>
+
+    <div class="project-tags">
+      <span class="tag" *ngFor="let tech of project.technologies">{{ tech }}</span>
+    </div>
+
+    <a routerLink="/project/{{ project.id }}" class="project-cta">
+      <span>View project</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+        <path d="M5 12h14M13 6l6 6-6 6"></path>
       </svg>
     </a>
-    <span *ngIf="project.link === '#'" class="text-gray-400 dark:text-gray-500 text-sm">
-      Coming soon
-    </span>
   </div>
-</div>
+</article>

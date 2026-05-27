@@ -27,7 +27,8 @@ export class ThemeService {
     if (saved !== null) {
       return saved === 'true';
     }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // Dark is the default theme for this portfolio.
+    return true;
   }
 
   private applyTheme(isDark: boolean): void {

@@ -7,30 +7,42 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#6366f1',
-        'primary-dark': '#4f46e5',
-        secondary: '#a78bfa',
-        accent: '#f59e0b',
-        surface: '#ffffff',
-        'surface-2': '#f8fafc',
-        text: '#1e293b',
-        'text-2': '#64748b',
-        border: '#e2e8f0',
+        // Mapped to CSS variables defined in styles.scss so Tailwind color
+        // utilities stay in sync with the theme tokens / accent swap.
+        bg: 'var(--bg)',
+        surface: 'var(--surface)',
+        'surface-2': 'var(--surface-2)',
+        card: 'var(--card)',
+        text: 'var(--text)',
+        'text-2': 'var(--text-2)',
+        'text-3': 'var(--text-3)',
+        border: 'var(--border)',
+        accent: 'var(--accent)',
+        'accent-text': 'var(--accent-text)',
+        'on-accent': 'var(--on-accent)',
       },
       fontFamily: {
-        'orbitron': ['Orbitron', 'monospace'],
-        'tech': ['Share Tech Mono', 'monospace'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Space Grotesk', 'Inter', 'sans-serif'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+      },
+      maxWidth: {
+        content: '1180px',
       },
       animation: {
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
+        'fade-up': 'fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+        float: 'float 6s ease-in-out infinite',
       },
       keyframes: {
-        glow: {
-          '0%': { filter: 'drop-shadow(0 0 10px rgba(0, 212, 255, 0.5))' },
-          '100%': { filter: 'drop-shadow(0 0 20px rgba(0, 212, 255, 0.8))' },
-        }
-      }
+        'fade-up': {
+          from: { opacity: '0', transform: 'translateY(20px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+      },
     },
   },
   plugins: [],
