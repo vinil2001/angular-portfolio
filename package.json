@@ -5,9 +5,11 @@
     "ng": "ng",
     "start": "ng serve angular-portfolio",
     "start:admin": "ng serve admin --port 4300",
+    "start:cv": "npm run build:cv && npx --yes serve dist/cv -p 4400",
     "build": "ng build angular-portfolio",
     "build:admin": "ng build admin",
     "build:lib": "ng build shared-data",
+    "build:cv": "node tools/build-cv.mjs",
     "watch": "ng build angular-portfolio --watch --configuration development",
     "test": "ng test angular-portfolio"
   },

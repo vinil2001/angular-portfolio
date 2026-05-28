@@ -1,0 +1,21 @@
+{
+  "name": "Andrii Boiko",
+  "role": "Full-Stack .NET Developer",
+  "tagline": "Umbraco, Azure & modern web.",
+  "email": "andriiboiko.vn@gmail.com",
+  "phone": "+380675081588",
+  "phoneDisplay": "+380 67 508 15 88",
+  "location": "Kyiv, Ukraine · Remote",
+  "availability": "Available for new projects",
+  "pageTitle": "Andrii Boiko — Full-Stack .NET Developer",
+  "metaDescription": "Andrii Boiko — Full-Stack .NET developer specialising in Umbraco, Azure and modern web. Portfolio, experience and projects.",
+  "stack": [".NET", "C#", "Umbraco", "Azure", "ASP.NET Core", "Next.js", "Angular", "TypeScript"],
+  "links": {
+    "linkedin": "https://www.linkedin.com/in/andrii-boiko-9908066b/",
+    "github": "https://github.com/vinil2001",
+    "cv": "https://vinil2001.github.io/cv-andrii-boiko/"
+  },
+  "contact": {
+    "formspreeEndpoint": "https://formspree.io/f/xpqnkgzo"
+  }
+}
