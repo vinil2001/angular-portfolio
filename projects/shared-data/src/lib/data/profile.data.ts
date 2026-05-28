@@ -56,7 +56,6 @@ export const PROFILE: Profile = {
     cv: 'https://vinil2001.github.io/cv-andrii-boiko/'
   },
   contact: {
-    // Paste your Formspree endpoint here, e.g. 'https://formspree.io/f/xxxxxxx'
-    formspreeEndpoint: ''
+    formspreeEndpoint: 'https://formspree.io/f/xpqnkgzo'
   }
 };
