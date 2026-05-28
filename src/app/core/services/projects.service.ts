@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Project } from '../../models/project.model';
-import { PROJECTS } from '../../data/projects.data';
+import { Project, PROJECTS } from 'shared-data';
 
 /**
  * Serves portfolio projects from a static source (see projects.data.ts).

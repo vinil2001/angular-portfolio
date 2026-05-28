@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
-import { PROFILE } from './data/profile.data';
+import { PROFILE } from 'shared-data';
 
 @Component({
   selector: 'app-root',

@@ -103,6 +103,8 @@
             <p *ngIf="getError('message')" class="field-error">{{ getError('message') }}</p>
           </div>
 
+          <p *ngIf="submitError" class="submit-error" role="alert">{{ submitError }}</p>
+
           <button type="submit" class="btn btn-accent submit-btn" [disabled]="isSubmitting">
             <span *ngIf="!isSubmitting">Send message</span>
             <span *ngIf="isSubmitting" class="sending">

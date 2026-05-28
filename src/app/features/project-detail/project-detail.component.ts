@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Project } from '../../models/project.model';
+import { Project } from 'shared-data';
 import { ProjectsService } from '../../core/services/projects.service';
 import { ImageCarouselComponent } from '../../components/image-carousel/image-carousel.component';
 

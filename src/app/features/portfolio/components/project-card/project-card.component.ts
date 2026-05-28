@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { Project } from '../../../../models/project.model';
+import { Project } from 'shared-data';
 import { ImageCarouselComponent } from '../../../../components/image-carousel/image-carousel.component';
 
 @Component({

@@ -4,13 +4,10 @@ import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Project } from '../../models/project.model';
 import { ProjectsService } from '../../core/services/projects.service';
 import { ProjectCardComponent } from './components/project-card/project-card.component';
 import { TechFilterComponent } from '../../components/tech-filter/tech-filter.component';
-import { Experience } from '../../models/experience.model';
-import { EXPERIENCE } from '../../data/experience.data';
-import { PROFILE } from '../../data/profile.data';
+import { Project, Experience, EXPERIENCE, PROFILE } from 'shared-data';
 
 interface PortfolioView {
   technologies: string[];

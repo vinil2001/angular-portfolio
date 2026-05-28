@@ -8,6 +8,15 @@ export interface ProfileLinks {
   cv: string;
 }
 
+export interface ContactConfig {
+  /**
+   * Formspree endpoint (https://formspree.io/f/XXXXXXX). Leave empty to keep the
+   * form as a visual mock; ContactComponent will show a friendly "configure me"
+   * message instead of attempting to POST.
+   */
+  formspreeEndpoint: string;
+}
+
 export interface Profile {
   name: string;
   role: string;
@@ -25,6 +34,7 @@ export interface Profile {
   /** Core technologies shown as chips on the home page. */
   stack: string[];
   links: ProfileLinks;
+  contact: ContactConfig;
 }
 
 export const PROFILE: Profile = {
@@ -34,7 +44,7 @@ export const PROFILE: Profile = {
   email: 'andriiboiko.vn@gmail.com',
   phone: '+380675081588',
   phoneDisplay: '+380 67 508 15 88',
-  location: 'Dnipro, Ukraine · Remote',
+  location: 'Kyiv, Ukraine · Remote',
   availability: 'Available for new projects',
   pageTitle: 'Andrii Boiko — Full-Stack .NET Developer',
   metaDescription:
@@ -44,5 +54,9 @@ export const PROFILE: Profile = {
     linkedin: 'https://www.linkedin.com/in/andrii-boiko-9908066b/',
     github: 'https://github.com/vinil2001',
     cv: 'https://vinil2001.github.io/cv-andrii-boiko/'
+  },
+  contact: {
+    // Paste your Formspree endpoint here, e.g. 'https://formspree.io/f/xxxxxxx'
+    formspreeEndpoint: ''
   }
 };

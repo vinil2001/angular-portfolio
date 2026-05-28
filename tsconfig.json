@@ -11,6 +11,12 @@
     "skipLibCheck": true,
     "isolatedModules": true,
     "experimentalDecorators": true,
+    "baseUrl": "./",
+    "paths": {
+      "shared-data": [
+        "./projects/shared-data/src/public-api"
+      ]
+    },
     "importHelpers": true,
     "target": "ES2022",
     "module": "preserve"
@@ -26,6 +32,12 @@
   "references": [
     {
       "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./projects/shared-data/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/shared-data/tsconfig.spec.json"
     }
   ]
 }
