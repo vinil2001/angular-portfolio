@@ -1,15 +1,11 @@
 export interface Project {
-  id?: string;
+  id: string;
   title: string;
   description: string;
-  imageUrl: string;
-  icon?: string;
-  link?: string;
-  images?: string[];
   technologies: string[];
-  projectUrl?: string;
+  images?: string[];
+  /** External live URL. Omit (or '#') to hide the "view live" action. */
+  link?: string;
   githubUrl?: string;
-  featured: boolean;
-  createdAt?: Date;
-  updatedAt?: Date;
+  featured?: boolean;
 }

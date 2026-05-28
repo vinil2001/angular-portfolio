@@ -1,14 +1,14 @@
 <header class="site-nav">
   <div class="container-x nav-inner">
-    <a routerLink="/" class="brand" aria-label="Andrii Boiko — home">
+    <a routerLink="/" class="brand" [attr.aria-label]="profile.name + ' — home'">
       <span class="brand-dot"></span>
-      <span>Andrii Boiko</span>
+      <span>{{ profile.name }}</span>
     </a>
 
     <nav class="nav-links" aria-label="Primary">
       <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">Work</a>
       <a routerLink="/contact" routerLinkActive="is-active" class="nav-link">Contact</a>
-      <a href="https://vinil2001.github.io/cv-andrii-boiko/" target="_blank" rel="noopener noreferrer" class="nav-link">
+      <a [href]="profile.links.cv" target="_blank" rel="noopener noreferrer" class="nav-link">
         CV
         <svg class="ext-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M7 17 17 7M9 7h8v8"></path>
@@ -28,21 +28,21 @@
     <div class="footer-brand">
       <a routerLink="/" class="brand">
         <span class="brand-dot"></span>
-        <span>Andrii Boiko</span>
+        <span>{{ profile.name }}</span>
       </a>
-      <p>Full-Stack .NET Developer — Umbraco, Azure &amp; modern web.</p>
+      <p>{{ profile.role }} — {{ profile.tagline }}</p>
     </div>
 
     <div class="footer-links">
-      <a href="https://www.linkedin.com/in/andrii-boiko-9908066b/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
-      <a href="https://vinil2001.github.io/cv-andrii-boiko/" target="_blank" rel="noopener noreferrer" class="footer-link">CV</a>
-      <a href="mailto:andriiboiko.vn@gmail.com" class="footer-link">Email</a>
+      <a [href]="profile.links.linkedin" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
+      <a [href]="profile.links.cv" target="_blank" rel="noopener noreferrer" class="footer-link">CV</a>
+      <a [href]="'mailto:' + profile.email" class="footer-link">Email</a>
       <a routerLink="/contact" class="footer-link">Contact</a>
     </div>
   </div>
 
   <div class="container-x footer-bottom">
-    <span>© {{ year }} Andrii Boiko</span>
+    <span>© {{ year }} {{ profile.name }}</span>
     <span>Built with Angular</span>
   </div>
 </footer>

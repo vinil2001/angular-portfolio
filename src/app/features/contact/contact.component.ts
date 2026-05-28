@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContactForm, ContactFormErrors } from '../../models/contact';
+import { PROFILE } from '../../data/profile.data';
 
 @Component({
   selector: 'app-contact',
@@ -11,6 +12,7 @@ import { ContactForm, ContactFormErrors } from '../../models/contact';
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
+  readonly profile = PROFILE;
   contactForm: FormGroup;
   isSubmitting = false;
   isSubmitted = false;

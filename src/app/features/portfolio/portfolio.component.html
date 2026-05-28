@@ -3,13 +3,13 @@
   <div class="container-x hero-inner fade-up">
     <span class="status-badge">
       <span class="status-dot"></span>
-      Available for new projects
+      {{ profile.availability }}
     </span>
 
-    <p class="eyebrow">Full-Stack .NET Developer</p>
+    <p class="eyebrow">{{ profile.role }}</p>
 
     <h1 class="hero-title">
-      Hi, I'm Andrii Boiko.<br />
+      Hi, I'm {{ profile.name }}.<br />
       I build <span class="accent-text">reliable</span> web products, end to end.
     </h1>
 
@@ -27,11 +27,11 @@
         </svg>
       </a>
       <a routerLink="/contact" class="btn btn-ghost">Get in touch</a>
-      <a href="https://vinil2001.github.io/cv-andrii-boiko/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Download CV</a>
+      <a [href]="profile.links.cv" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Download CV</a>
     </div>
 
     <ul class="hero-stack" aria-label="Core stack">
-      <li class="tag" *ngFor="let tech of stack">{{ tech }}</li>
+      <li class="tag" *ngFor="let tech of profile.stack">{{ tech }}</li>
     </ul>
   </div>
 </section>

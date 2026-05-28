@@ -5,11 +5,12 @@ import { RouterLink } from '@angular/router';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Project } from '../../models/project.model';
-import { FirebaseService } from '../../services/firebase.service';
+import { ProjectsService } from '../../core/services/projects.service';
 import { ProjectCardComponent } from './components/project-card/project-card.component';
 import { TechFilterComponent } from '../../components/tech-filter/tech-filter.component';
 import { Experience } from '../../models/experience.model';
 import { EXPERIENCE } from '../../data/experience.data';
+import { PROFILE } from '../../data/profile.data';
 
 interface PortfolioView {
   technologies: string[];
@@ -26,17 +27,16 @@ interface PortfolioView {
 })
 export class PortfolioComponent implements OnInit {
   vm$!: Observable<PortfolioView>;
-  experience: Experience[] = EXPERIENCE;
-
-  readonly stack = ['.NET', 'C#', 'Umbraco', 'Azure', 'ASP.NET Core', 'Next.js', 'Angular', 'TypeScript'];
+  readonly profile = PROFILE;
+  readonly experience: Experience[] = EXPERIENCE;
 
   private activeFilters$ = new BehaviorSubject<string[]>([]);
 
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(private projectsService: ProjectsService) {}
 
   ngOnInit() {
     this.vm$ = combineLatest([
-      this.firebaseService.getProjects(),
+      this.projectsService.getProjects(),
       this.activeFilters$
     ]).pipe(
       map(([projects, active]) => ({

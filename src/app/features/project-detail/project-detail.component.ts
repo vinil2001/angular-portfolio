@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Project } from '../../models/project';
-import { Portfolio } from '../../core/services/portfolio';
+import { Project } from '../../models/project.model';
+import { ProjectsService } from '../../core/services/projects.service';
 import { ImageCarouselComponent } from '../../components/image-carousel/image-carousel.component';
 
 @Component({
@@ -16,22 +15,15 @@ import { ImageCarouselComponent } from '../../components/image-carousel/image-ca
 })
 export class ProjectDetailComponent implements OnInit {
   project$!: Observable<Project | undefined>;
-  
+
   constructor(
     private route: ActivatedRoute,
-    private portfolio: Portfolio
+    private projects: ProjectsService
   ) {}
 
   ngOnInit() {
-    const projectId = Number(this.route.snapshot.paramMap.get('id'));
-    this.project$ = this.portfolio.getProjects().pipe(
-      map(projects => {
-        const project = projects.find(p => p.id === projectId);
-        console.log('Found project:', project);
-        console.log('Project images:', project?.images);
-        return project;
-      })
-    );
+    const id = this.route.snapshot.paramMap.get('id') ?? '';
+    this.project$ = this.projects.getProject(id);
   }
 
   goBack(): void {
