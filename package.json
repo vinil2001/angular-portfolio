@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve angular-portfolio",
+    "start:admin": "ng serve admin --port 4300",
     "build": "ng build angular-portfolio",
+    "build:admin": "ng build admin",
     "build:lib": "ng build shared-data",
     "watch": "ng build angular-portfolio --watch --configuration development",
     "test": "ng test angular-portfolio"

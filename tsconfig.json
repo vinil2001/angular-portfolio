@@ -37,6 +37,12 @@
       "path": "./projects/portfolio/tsconfig.spec.json"
     },
     {
+      "path": "./projects/admin/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/admin/tsconfig.spec.json"
+    },
+    {
       "path": "./projects/shared-data/tsconfig.lib.json"
     },
     {
