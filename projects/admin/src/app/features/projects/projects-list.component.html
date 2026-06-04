@@ -1,0 +1,77 @@
+<div class="head">
+  <div>
+    <p class="eyebrow">Content</p>
+    <h1>Projects</h1>
+    <p class="subtitle">Drag to reorder, then save. Order controls how cards appear on the site.</p>
+  </div>
+  <div class="head__actions">
+    <button class="btn btn-ghost" (click)="load()" [disabled]="loading() || saving()">Reload</button>
+    <button class="btn btn-ghost" (click)="saveOrder()" [disabled]="!dirty() || saving()">
+      {{ saving() ? 'Saving…' : 'Save order' }}
+    </button>
+    <a class="btn btn-accent" routerLink="/projects/new">+ New project</a>
+  </div>
+</div>
+
+@if (error()) {
+  <div class="alert" role="alert">{{ error() }}</div>
+}
+
+@if (dirty() && !saving()) {
+  <div class="hint">Unsaved order changes.</div>
+}
+
+@if (loading()) {
+  <p class="muted">Loading…</p>
+} @else if (projects().length === 0) {
+  <p class="muted">No projects yet.</p>
+} @else {
+  <ul class="list" cdkDropList (cdkDropListDropped)="drop($event)">
+    @for (p of projects(); track trackById($index, p)) {
+      <li class="row card" cdkDrag>
+        <div class="row__placeholder" *cdkDragPlaceholder></div>
+
+        <button type="button" class="handle" cdkDragHandle aria-label="Drag to reorder">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <circle cx="9" cy="6" r="1.6" /><circle cx="15" cy="6" r="1.6" />
+            <circle cx="9" cy="12" r="1.6" /><circle cx="15" cy="12" r="1.6" />
+            <circle cx="9" cy="18" r="1.6" /><circle cx="15" cy="18" r="1.6" />
+          </svg>
+        </button>
+
+        <span class="pos">{{ $index + 1 }}</span>
+
+        <div class="thumb">
+          @if (thumb(p); as src) {
+            <img [src]="src" [alt]="p.title" loading="lazy" />
+          } @else {
+            <div class="thumb--empty">—</div>
+          }
+        </div>
+
+        <div class="info">
+          <div class="info__title">
+            {{ p.title }}
+            @if (p.featured) { <span class="star" title="Featured">★</span> }
+          </div>
+          <div class="tags">
+            @for (t of p.technologies.slice(0, 6); track t) {
+              <span class="tag">{{ t }}</span>
+            }
+            @if (p.technologies.length > 6) {
+              <span class="tag">+{{ p.technologies.length - 6 }}</span>
+            }
+          </div>
+        </div>
+
+        <div class="row__actions">
+          <a class="btn btn-ghost btn-sm" [routerLink]="['/projects', p.id, 'edit']">Edit</a>
+          <button class="btn btn-danger btn-sm" (click)="remove(p)"
+                  [disabled]="deletingId() === p.id">
+            {{ deletingId() === p.id ? '…' : 'Delete' }}
+          </button>
+        </div>
+      </li>
+    }
+  </ul>
+}

@@ -38,6 +38,10 @@ testem.log
 /typings
 __screenshots__/
 
+# .NET (admin-api build output)
+[Bb]in/
+[Oo]bj/
+
 # System files
 .DS_Store
 Thumbs.db

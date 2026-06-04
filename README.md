@@ -1,147 +1,211 @@
-# Angular Portfolio
+# Angular Portfolio Workspace
 
-A modern, responsive portfolio website built with Angular 17, featuring project showcase, image galleries, and contact form.
+A modern, responsive portfolio built with **Angular 20**, organised as a multi-project Angular workspace. The workspace bundles the public portfolio site, an admin app, a shared data library, and a static CV — all sharing a single canonical profile.
 
 ## 🚀 Features
 
-- **Modern Angular 17** with standalone components
-- **Responsive Design** with Tailwind CSS
-- **Dark Mode** support with theme toggle
-- **Project Gallery** with image carousel and preview
-- **Contact Form** with validation
-- **TypeScript** for type safety
-- **GitHub Pages** deployment ready
+- **Angular 20** with standalone components
+- **Multi-project workspace** — portfolio, admin, shared library, and CV in one repo
+- **Single source of truth** — profile / projects / experience live in the `shared-data` library and feed every app
+- **Responsive design** with dark mode and theme toggle
+- **Project gallery** with image carousel and preview
+- **Contact form** wired to [Formspree](https://formspree.io/)
+- **Static CV** generated from the shared profile, deployable on its own
+- **TypeScript** throughout
+- **GitHub Pages** ready (production build outputs to `docs/`)
 
-## 📦 Installation
+## 📦 Workspace layout
+
+```
+angular-portfolio/
+├── projects/
+│   ├── portfolio/        # Public portfolio app (project name: angular-portfolio)
+│   │   └── src/app/
+│   │       ├── components/   # Reusable UI (carousel, theme toggle, …)
+│   │       ├── features/     # Portfolio, project detail, contact
+│   │       ├── core/         # Core services
+│   │       ├── shared/       # Shared app pieces
+│   │       └── models/       # App-level interfaces
+│   ├── admin/            # Standalone admin app (manage projects: reorder, CRUD, images)
+│   └── shared-data/      # Library: models + data (profile, projects, experience)
+│       └── src/lib/
+│           ├── data/         # profile.json + projects.json + *.data.ts (canonical content)
+│           └── models/       # Shared TypeScript interfaces
+├── cv/                   # Static CV source (index.html, styles.css, script.js)
+├── tools/
+│   ├── admin-api/        # Local-only .NET minimal API the admin writes through
+│   └── build-cv.mjs      # Builds cv/ → dist/cv/, hydrating from profile.json
+├── docs/                 # Production build output for the portfolio (GitHub Pages)
+└── angular.json          # Workspace configuration
+```
+
+`shared-data` is the single source of truth. Its public API is exported from
+`projects/shared-data/src/public-api.ts` and consumed by the portfolio, the admin
+app, and the CV build.
+
+## 🧰 Prerequisites
+
+- **Node.js** 20.x or newer (Angular 20 requirement)
+- **npm** 10.x or newer
+- **Angular CLI** (`npm install -g @angular/cli`) — optional; you can use the local CLI via `npm run`
+- **.NET SDK** 8.0 or newer — only needed to run the local admin API (`tools/admin-api`); not required to build or deploy the public site
+
+## 🏃 Run locally
 
 ```bash
-# Clone the repository
+# 1. Clone the repository
 git clone https://github.com/vinil2001/angular-portfolio.git
 cd angular-portfolio
 
-# Install dependencies
+# 2. Install dependencies (once)
 npm install
 
-# Run development server
-ng serve
+# 3. Build the shared library first — the apps depend on it
+npm run build:lib
 
-# Open http://localhost:4200
+# 4. Start the app you want to work on (each runs on its own port)
+npm start            # Portfolio  → http://localhost:4200
+npm run start:admin  # Admin      → http://localhost:4300
+npm run start:cv     # CV         → http://localhost:4400 (builds + serves dist/cv)
 ```
 
-## 🛠️ Build & Deploy
+> **Tip:** Re-run `npm run build:lib` whenever you change anything under
+> `projects/shared-data/` so the dependent apps pick up the new types/data.
 
-### Local Build
+## 🛠️ Build
+
 ```bash
-# Build for production
-ng build --configuration production
-
-# The build artifacts will be stored in the dist/ directory
+npm run build:lib     # Build the shared-data library (do this first)
+npm run build         # Build the portfolio → outputs to docs/
+npm run build:admin   # Build the admin app  → outputs to dist/admin/
+npm run build:cv      # Build the static CV  → outputs to dist/cv/
 ```
 
-### GitHub Pages Deployment
+The portfolio production build uses base href `/angular-portfolio/` and writes to
+`docs/`, which GitHub Pages serves directly.
 
-This project is configured for automatic deployment to GitHub Pages. When you push to the `main` branch, GitHub Actions will:
+## 🚀 Deploy
 
-1. Build the application
-2. Deploy to GitHub Pages
-3. Your site will be available at: `https://vinil2001.github.io/angular-portfolio/`
+### Portfolio — GitHub Pages (from `docs/`)
 
-#### Manual Deployment
 ```bash
-# Build with base href
-ng build --configuration production
-
-# Deploy to GitHub Pages
-npx angular-cli-ghpages --dir=dist/angular-portfolio
+npm run build         # Produces docs/
+git add docs && git commit -m "build: deploy portfolio"
+git push
 ```
 
-## 📁 Project Structure
+In the repository settings, configure **GitHub Pages → Source → main branch /docs folder**.
+The site is published at `https://vinil2001.github.io/angular-portfolio/`.
 
+### CV — static, host anywhere
+
+```bash
+npm run build:cv      # Produces dist/cv/
 ```
-src/
-├── app/
-│   ├── components/          # Reusable components
-│   │   ├── image-carousel/  # Image gallery component
-│   │   ├── tech-filter/     # Technology filter
-│   │   └── theme-toggle/    # Dark mode toggle
-│   ├── features/            # Feature modules
-│   │   ├── portfolio/       # Portfolio listing
-│   │   ├── project-detail/  # Project details
-│   │   └── contact/         # Contact form
-│   ├── models/              # TypeScript interfaces
-│   ├── core/                # Core services
-│   └── app.routes.ts        # Routing configuration
-├── styles.scss              # Global styles
-└── index.html               # Main HTML
+
+`dist/cv/` is a self-contained static site (HTML/CSS/JS + `data.json`). Drop it on
+any static host (GitHub Pages, Netlify, Vercel, S3, …). The HTML keeps real values
+as a no-JS fallback; when served over http(s) it fetches `data.json` so the
+deployed CV always tracks `profile.json`.
+
+### Admin
+
+```bash
+npm run build:admin   # Produces dist/admin/
 ```
+
+Deploy `dist/admin/` to any static host.
 
 ## 🎨 Customization
 
-### Adding Projects
-Edit `src/app/core/services/portfolio.ts` and add your projects to the `loadDefaultProjects()` method:
+### Profile, projects & experience (shared content)
+Edit the canonical data in the shared library:
 
-```typescript
-{
-  id: 1,
-  title: 'Your Project',
-  description: 'Project description',
-  icon: '🚀',
-  link: 'https://github.com/your-repo',
-  technologies: ['Angular', 'TypeScript', 'Tailwind'],
-  featured: true,
-  images: ['image1.jpg', 'image2.jpg']
-}
-```
+- **Profile** (name, role, email, phone, social links): `projects/shared-data/src/lib/data/profile.json`
+- **Projects**: `projects/shared-data/src/lib/data/projects.json` — edit by hand, or use the **admin app** (see below)
+- **Experience**: `projects/shared-data/src/lib/data/experience.data.ts`
 
-### Updating Contact Info
-Edit `src/app/features/contact/contact.component.html` and update the contact information.
+After editing, run `npm run build:lib` (and `npm run build:cv` if the CV is affected).
 
-### Theme Colors
-Edit `src/styles.scss` and modify the CSS variables in the `:root` selector.
+## ✏️ Editing projects via the admin
 
-## 🌐 Deployment Options
-
-### GitHub Pages (Recommended)
-- Free hosting
-- Automatic HTTPS
-- Custom domain support
-- CI/CD with GitHub Actions
-
-### Netlify
-```bash
-# Install Netlify CLI
-npm install -g netlify-cli
-
-# Deploy
-netlify deploy --prod --dir=dist/angular-portfolio
-```
-
-### Vercel
-```bash
-# Install Vercel CLI
-npm install -g vercel
-
-# Deploy
-vercel --prod
-```
-
-## 📝 Scripts
+Projects live in `projects/shared-data/src/lib/data/projects.json` (each has an
+`order` field that controls its position on the site). The portfolio fetches
+this file at runtime, so reordering or editing is just a matter of rewriting the
+JSON — which the admin app does for you through a small **local** .NET API.
 
 ```bash
-# Start development server
-ng serve
+# Run the admin API + admin app together (two coloured logs in one terminal)
+npm run admin            # API → http://localhost:5174 , Admin → http://localhost:4300
+```
 
-# Run tests
-ng test
+Or run the two halves separately:
 
-# Build for production
-ng build
+```bash
+npm run start:admin:api  # .NET API (tools/admin-api) → :5174
+npm run start:admin      # Admin app → :4300 (proxies /api → :5174)
+```
 
-# Run linting
-ng lint
+In the admin you can:
 
-# Deploy to GitHub Pages
-npm run deploy
+- **Reorder** projects by drag-and-drop, then **Save order**
+- **Create / edit / delete** projects (title, description, technologies, links, video, featured)
+- **Upload images** (drag-drop or browse); files are saved to `projects/portfolio/public/projects/`
+
+All changes are written to `projects.json` and the `public/projects/` image
+folder — i.e. straight into the repo. **Nothing is live until you commit and
+redeploy** (the public site stays a free static build; the admin/API are never
+deployed and listen on localhost only).
+
+### Publishing your edits
+
+```bash
+git add projects/shared-data/src/lib/data/projects.json projects/portfolio/public/projects
+git commit -m "content: update projects"
+npm run build            # rebuild the portfolio → docs/
+git add docs && git commit -m "build: deploy portfolio"
+git push
+```
+
+### Optional write protection
+
+The API only listens on `localhost`, so local access is the security boundary.
+To additionally gate writes behind a shared secret, set `ADMIN_API_TOKEN` before
+starting the API and store the same value in the admin app once:
+
+```bash
+# terminal: start the API with a token
+ADMIN_API_TOKEN=mysecret npm run start:admin:api
+```
+
+```js
+// browser console on the admin app, once:
+localStorage.setItem('adminToken', 'mysecret')
+```
+
+With no token set, the admin works with no auth (the default).
+
+### Contact form
+The contact form posts to Formspree. Update the endpoint in the portfolio's
+contact feature under `projects/portfolio/src/app/features/contact/`.
+
+### Theme colors / global styles
+Edit `projects/portfolio/src/styles.scss`.
+
+## 📝 npm scripts
+
+```bash
+npm start            # Serve the portfolio (ng serve angular-portfolio) → :4200
+npm run start:admin  # Serve the admin app → :4300
+npm run start:admin:api  # Serve the local admin .NET API → :5174
+npm run admin        # Serve the admin API + admin app together
+npm run start:cv     # Build + serve the CV → :4400
+npm run build        # Build the portfolio → docs/
+npm run build:admin  # Build the admin app → dist/admin/
+npm run build:lib    # Build the shared-data library
+npm run build:cv     # Build the static CV → dist/cv/
+npm run watch         # Rebuild the portfolio on change (development config)
+npm test             # Run portfolio unit tests (Karma)
 ```
 
 ## 🤝 Contributing
@@ -154,7 +218,7 @@ npm run deploy
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
 ## 🔗 Links
 
@@ -164,7 +228,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## ⭐ Acknowledgments
 
-- [Angular](https://angular.io/) - Web framework
-- [Tailwind CSS](https://tailwindcss.com/) - CSS framework
-- [Heroicons](https://heroicons.com/) - Icon library
-- [Picsum](https://picsum.photos/) - Placeholder images
+- [Angular](https://angular.io/) — Web framework
+- [Tailwind CSS](https://tailwindcss.com/) — CSS framework
+- [Heroicons](https://heroicons.com/) — Icon library
+- [Picsum](https://picsum.photos/) — Placeholder images
+- [Formspree](https://formspree.io/) — Contact form backend

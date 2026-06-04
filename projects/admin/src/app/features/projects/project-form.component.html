@@ -1,0 +1,144 @@
+<div class="head">
+  <div>
+    <p class="eyebrow">{{ isEdit() ? 'Edit' : 'New' }}</p>
+    <h1>{{ isEdit() ? 'Edit project' : 'New project' }}</h1>
+  </div>
+  <a class="btn btn-ghost" routerLink="/projects">Cancel</a>
+</div>
+
+@if (error()) {
+  <div class="alert" role="alert">{{ error() }}</div>
+}
+
+@if (loading()) {
+  <p class="muted">Loading…</p>
+} @else {
+  <div class="layout">
+    <form class="form card" [formGroup]="form" (ngSubmit)="submit()">
+      <label class="group">
+        <span class="label">Title <em>*</em></span>
+        <input class="field" type="text" formControlName="title" placeholder="Project title" />
+        @if (form.controls.title.touched && form.controls.title.invalid) {
+          <span class="err">Title is required.</span>
+        }
+      </label>
+
+      <label class="group">
+        <span class="label">Description <em>*</em></span>
+        <textarea class="field" rows="7" formControlName="description"
+                  placeholder="What is it, your role, the stack, the outcome…"></textarea>
+        @if (form.controls.description.touched && form.controls.description.invalid) {
+          <span class="err">Description is required.</span>
+        }
+      </label>
+
+      <div class="group">
+        <span class="label">Technologies</span>
+        <div class="chips">
+          @for (t of technologies(); track t) {
+            <span class="tag tag--removable">
+              {{ t }}
+              <button type="button" class="tag__x" (click)="removeTech(t)" aria-label="Remove">×</button>
+            </span>
+          }
+          @if (technologies().length === 0) {
+            <span class="muted small">No technologies yet.</span>
+          }
+        </div>
+        <input class="field" type="text" #techInput
+               placeholder="Type a tech and press Enter"
+               (keydown.enter)="$event.preventDefault(); addTech(techInput)"
+               (blur)="addTech(techInput)" />
+      </div>
+
+      <label class="group">
+        <span class="label">Live URL</span>
+        <input class="field" type="url" formControlName="link" placeholder="https://example.com" />
+      </label>
+
+      <label class="group">
+        <span class="label">GitHub URL</span>
+        <input class="field" type="url" formControlName="githubUrl" placeholder="https://github.com/…" />
+      </label>
+
+      <label class="group">
+        <span class="label">Video URL (YouTube)</span>
+        <input class="field" type="url" formControlName="videoUrl" placeholder="https://youtube.com/watch?v=…" />
+      </label>
+
+      <div class="group">
+        <span class="label">Images</span>
+        @if (!isEdit()) {
+          <span class="muted small">Save the project first, then reopen it to add images.</span>
+        } @else {
+          <div class="drop"
+               [class.drop--over]="dragOver()"
+               (dragover)="$event.preventDefault(); dragOver.set(true)"
+               (dragleave)="dragOver.set(false)"
+               (drop)="onDrop($event)">
+            <input type="file" id="imgInput" accept="image/*" multiple hidden
+                   (change)="onFileInput($event)" />
+            <label for="imgInput" class="drop__label">
+              {{ uploading() ? 'Uploading…' : 'Drop images here or click to browse' }}
+            </label>
+          </div>
+
+          @if (images().length) {
+            <div class="imgs">
+              @for (img of images(); track img; let i = $index) {
+                <div class="imgs__item">
+                  <img [src]="imageSrc(img)" [alt]="img" />
+                  @if (i === 0) { <span class="imgs__cover">Cover</span> }
+                  <div class="imgs__ctrl">
+                    <button type="button" (click)="moveImage(i, -1)" [disabled]="i === 0" aria-label="Move left">‹</button>
+                    <button type="button" (click)="moveImage(i, 1)" [disabled]="i === images().length - 1" aria-label="Move right">›</button>
+                    <button type="button" class="imgs__del" (click)="removeImage(img)" aria-label="Remove">×</button>
+                  </div>
+                </div>
+              }
+            </div>
+          }
+        }
+      </div>
+
+      <label class="check">
+        <input type="checkbox" formControlName="featured" />
+        <span>Featured</span>
+      </label>
+
+      <div class="actions">
+        <a class="btn btn-ghost" routerLink="/projects">Cancel</a>
+        <button class="btn btn-accent" type="submit" [disabled]="saving()">
+          {{ saving() ? 'Saving…' : (isEdit() ? 'Save changes' : 'Create project') }}
+        </button>
+      </div>
+    </form>
+
+    <aside class="preview">
+      <p class="eyebrow">Preview</p>
+      <article class="pcard card">
+        <div class="pcard__thumb">
+          @if (preview().image) {
+            <img [src]="preview().image" [alt]="preview().title" />
+          } @else {
+            <div class="pcard__thumb--empty">No image</div>
+          }
+        </div>
+        <div class="pcard__body">
+          <h3>
+            {{ preview().title }}
+            @if (preview().featured) { <span class="star">★</span> }
+          </h3>
+          @if (preview().description) {
+            <p class="pcard__desc">{{ preview().description }}</p>
+          }
+          <div class="chips">
+            @for (t of preview().technologies; track t) {
+              <span class="tag">{{ t }}</span>
+            }
+          </div>
+        </div>
+      </article>
+    </aside>
+  </div>
+}

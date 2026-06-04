@@ -50,6 +50,11 @@
               {
                 "glob": "**/*",
                 "input": "projects/portfolio/public"
+              },
+              {
+                "glob": "projects.json",
+                "input": "projects/shared-data/src/lib/data",
+                "output": "/"
               }
             ],
             "styles": [
@@ -109,6 +114,11 @@
               {
                 "glob": "**/*",
                 "input": "projects/portfolio/public"
+              },
+              {
+                "glob": "projects.json",
+                "input": "projects/shared-data/src/lib/data",
+                "output": "/"
               }
             ],
             "styles": [
@@ -144,6 +154,11 @@
               {
                 "glob": "**/*",
                 "input": "projects/admin/public"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/portfolio/public/projects",
+                "output": "/projects"
               }
             ],
             "styles": [
@@ -176,6 +191,9 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "proxyConfig": "projects/admin/proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "admin:build:production"
