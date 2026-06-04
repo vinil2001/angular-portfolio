@@ -1,0 +1,85 @@
+[
+  {
+    "id": "1",
+    "order": 1,
+    "title": "Xpand Portal — Secure B2B Portal for Enterprise Resource Access",
+    "description": "A modular B2B platform providing secure, role-based access to enterprise resources — documents, HR data and project information — and direct access to key Microsoft Dynamics 365 Business Central data for partner collaboration. As a .NET full-stack developer (Umbraco, AngularJS) over 4 years at Xpand Software I developed backend features and APIs with ASP.NET and .NET 8, migrated the CMS from Umbraco 8 to Umbraco 13 (content models, Lucene search indexing and custom integrations), built and optimised data access with Entity Framework and SQL Server, and implemented CI/CD pipelines in Azure DevOps for automated builds and deployments — alongside front-end work with jQuery and Kendo UI.",
+    "technologies": [
+      ".NET 8",
+      "ASP.NET",
+      "C#",
+      "Umbraco",
+      "AngularJS",
+      "jQuery",
+      "Kendo UI",
+      "Entity Framework",
+      "SQL Server",
+      "Lucene",
+      "Azure DevOps"
+    ],
+    "link": "https://www.xpandportal.com/",
+    "videoUrl": "https://www.youtube.com/watch?v=KRP57BI3218",
+    "featured": true,
+    "images": [
+      "projects/xpandportal.png"
+    ]
+  },
+  {
+    "id": "2",
+    "order": 2,
+    "title": "ISpro — Enterprise Resource Planning (ERP) System",
+    "description": "A 100% Ukrainian-built ERP platform covering accounting, finance, logistics, HR and compliance. As a .NET backend developer I built the backend logic for the accounting, HR and warehouse modules, developed RESTful APIs for integration with banking and government systems, optimised SQL queries and stored procedures for high performance, and refactored legacy code by migrating it to Entity Framework for better scalability.",
+    "technologies": [
+      "C#",
+      "ASP.NET",
+      ".NET Core",
+      "SQL Server",
+      "Entity Framework",
+      "REST API",
+      "WinForms"
+    ],
+    "link": "https://ispro.ua",
+    "featured": true,
+    "images": [
+      "projects/ispro.png"
+    ]
+  },
+  {
+    "id": "3",
+    "order": 3,
+    "title": "AutoMall.md — Online Auto Marketplace",
+    "description": "Moldova’s top online auto-parts marketplace connecting car buyers and sellers. As a .NET full-stack developer I built backend features with ASP.NET Core and Entity Framework (search, filtering, ads), developed a dynamic UI with JavaScript, jQuery, AJAX and Bootstrap, designed the database models and optimised SQL queries, implemented authentication, roles and an admin dashboard, and integrated third-party services such as payment systems and Google Maps.",
+    "technologies": [
+      "ASP.NET Core",
+      "Entity Framework",
+      "C#",
+      "SQL",
+      "JavaScript",
+      "jQuery",
+      "AJAX",
+      "Bootstrap",
+      "Google Maps"
+    ],
+    "link": "https://automall.md",
+    "featured": true,
+    "images": [
+      "projects/automall.png"
+    ]
+  },
+  {
+    "id": "4",
+    "order": 4,
+    "title": "Responsive Landing Page with Mailchimp Integration",
+    "description": "Designed and built a modern, fully responsive marketing landing page from design to deployment. I converted the provided Adobe XD design into a clean HTML/CSS layout, implemented all content (text, buttons, images and sections), integrated the newsletter subscription form with Mailchimp, set up hosting and deployed the live site on GoDaddy, and tested responsiveness across a range of devices. The result is a polished, lead-ready landing page that supports the client’s marketing campaigns.",
+    "technologies": [
+      "HTML",
+      "CSS3",
+      "Adobe XD",
+      "Mailchimp",
+      "GoDaddy"
+    ],
+    "images": [
+      "projects/coop-landing.png"
+    ]
+  }
+]
