@@ -26,6 +26,19 @@
               <p>{{ project.description }}</p>
             </section>
 
+            <section class="detail-block" *ngIf="project.videoUrl">
+              <h2>Video overview</h2>
+              <div class="video-embed">
+                <iframe
+                  [src]="embedUrl(project.videoUrl)"
+                  title="Project video"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen></iframe>
+              </div>
+            </section>
+
             <section class="detail-block">
               <h2>Key features</h2>
               <ul class="feature-list">
