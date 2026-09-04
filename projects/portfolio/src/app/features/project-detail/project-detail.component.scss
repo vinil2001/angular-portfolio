@@ -10,12 +10,14 @@
   overflow: hidden;
   background: #000;
 
-  iframe {
+  iframe,
+  video {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     border: 0;
+    object-fit: contain;
   }
 }
 
@@ -50,22 +52,16 @@
 .detail-hero-overlay {
   position: absolute;
   inset: auto 0 0 0;
-  padding: 2rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.1) 70%, transparent);
+  padding: 1.5rem 2rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 50%, transparent 100%);
   pointer-events: none;
 }
 
 .detail-title {
-  font-size: clamp(1.8rem, 4vw, 2.75rem);
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
   color: #fff;
   margin: 0;
-}
-
-.detail-subtitle {
-  margin: 0.5rem 0 0;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 1.05rem;
-  max-width: 40rem;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
 }
 
 /* ---- Body ---------------------------------------------------------------- */

@@ -39,6 +39,12 @@ export class ProjectDetailComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(src);
   }
 
+  /** True for a self-hosted media file (served from public/) rather than a YouTube link. */
+  isFileVideo(url: string): boolean {
+    const path = (url.split('?')[0] ?? '').toLowerCase();
+    return ['.mp4', '.webm', '.ogv', '.ogg', '.mov'].some((ext) => path.endsWith(ext));
+  }
+
   goBack(): void {
     window.history.back();
   }

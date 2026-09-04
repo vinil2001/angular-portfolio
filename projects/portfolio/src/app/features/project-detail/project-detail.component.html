@@ -14,7 +14,6 @@
           <app-image-carousel [images]="project.images || []" height="h-96" [showPreview]="true"></app-image-carousel>
           <div class="detail-hero-overlay">
             <h1 class="detail-title">{{ project.title }}</h1>
-            <p class="detail-subtitle">{{ project.description }}</p>
           </div>
         </div>
 
@@ -29,13 +28,21 @@
             <section class="detail-block" *ngIf="project.videoUrl">
               <h2>Video overview</h2>
               <div class="video-embed">
-                <iframe
-                  [src]="embedUrl(project.videoUrl)"
-                  title="Project video"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen></iframe>
+                <video
+                  *ngIf="isFileVideo(project.videoUrl); else youtubeEmbed"
+                  [src]="project.videoUrl"
+                  controls
+                  preload="metadata"
+                  playsinline></video>
+                <ng-template #youtubeEmbed>
+                  <iframe
+                    [src]="embedUrl(project.videoUrl)"
+                    title="Project video"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen></iframe>
+                </ng-template>
               </div>
             </section>
 
