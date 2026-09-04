@@ -25,28 +25,78 @@
     ]
   },
   {
-    "id": "2",
+    "id": "4",
     "order": 2,
-    "title": "ISpro — Enterprise Resource Planning (ERP) System",
-    "description": "A 100% Ukrainian-built ERP platform covering accounting, finance, logistics, HR and compliance. As a .NET backend developer I built the backend logic for the accounting, HR and warehouse modules, developed RESTful APIs for integration with banking and government systems, optimised SQL queries and stored procedures for high performance, and refactored legacy code by migrating it to Entity Framework for better scalability.",
+    "title": "Responsive Landing Page with Mailchimp Integration",
+    "description": "Designed and built a modern, fully responsive marketing landing page from design to deployment. I converted the provided Adobe XD design into a clean HTML/CSS layout, implemented all content (text, buttons, images and sections), integrated the newsletter subscription form with Mailchimp, set up hosting and deployed the live site on GoDaddy, and tested responsiveness across a range of devices. The result is a polished, lead-ready landing page that supports the client’s marketing campaigns.",
     "technologies": [
-      "C#",
-      "ASP.NET",
-      ".NET Core",
-      "SQL Server",
-      "Entity Framework",
-      "REST API",
-      "WinForms"
+      "HTML",
+      "CSS3",
+      "Adobe XD",
+      "Mailchimp",
+      "GoDaddy"
     ],
-    "link": "https://ispro.ua",
+    "images": [
+      "projects/coop-landing.png"
+    ]
+  },
+  {
+    "id": "5",
+    "order": 3,
+    "title": "EnergyWallet — Fintech Wallet & E-commerce Platform",
+    "description": "A full-stack .NET 9 platform for digital wallets and e-commerce, built around a backend API (ASP.NET Core, EF Core, SQL Server, Redis, Azure Service Bus, SignalR), an Admin Web Portal (Blazor WASM) for managing users, transactions and vendors, and a Vendor Web Portal (Blazor WASM) for products, orders and analytics. The platform covers multi-wallets, payments, orders, cart and vouchers, with push notifications via Firebase, transactional email through MailKit, PDF generation with QuestPDF, OData query support and JWT authentication. Infrastructure runs on Azure DevOps CI/CD with Application Insights and Sentry for monitoring, and the codebase is covered by unit tests.",
+    "technologies": [
+      ".NET 9",
+      "ASP.NET Core",
+      "Blazor WASM",
+      "C#",
+      "Entity Framework Core",
+      "SQL Server",
+      "Redis",
+      "Azure Service Bus",
+      "SignalR",
+      "Firebase",
+      "QuestPDF",
+      "OData",
+      "Azure DevOps"
+    ],
     "featured": true,
     "images": [
-      "projects/ispro.png"
+      "projects/energywallet-1.png",
+      "projects/energywallet-2.png",
+      "projects/energywallet-3.png",
+      "projects/energywallet-4.png"
+    ]
+  },
+  {
+    "id": "6",
+    "order": 4,
+    "title": "Erskine — Umbraco 8 to 13 Migration & Code Refactoring",
+    "description": "Helped a UK-based web agency migrate and modernise the Erskine Veterans Charity website from Umbraco 8 to Umbraco 13, including full code refactoring, content migration and infrastructure updates for .NET 8. I audited dependencies, Umbraco APIs, custom code and integrations, set up a clean Umbraco 13 solution on .NET 8 with GitHub repositories and environments, and migrated document types, data types, content and media with uSync onto Azure Blob Storage. Controllers, services and models were ported to .NET 8 and refactored for dependency injection, Razor views updated, and backoffice extensions (AngularJS) and Vue.js components rewritten; Umbraco Forms were migrated, Redis caching implemented and obsolete packages replaced. After functional and regression testing and performance tuning the site went live as a fully upgraded, stable and maintainable Umbraco 13 platform ready for future development.",
+    "technologies": [
+      "ASP.NET MVC",
+      ".NET 8",
+      "Umbraco 13",
+      "C#",
+      "Razor",
+      "Umbraco Forms",
+      "uSync",
+      "Azure Blob Storage",
+      "Vue.js",
+      "Redis",
+      "MSSQL",
+      "GitHub"
+    ],
+    "link": "https://www.erskine.org.uk/",
+    "videoUrl": "projects/erskine-overview.mp4",
+    "featured": true,
+    "images": [
+      "projects/erskine.jpg"
     ]
   },
   {
     "id": "3",
-    "order": 3,
+    "order": 5,
     "title": "AutoMall.md — Online Auto Marketplace",
     "description": "Moldova’s top online auto-parts marketplace connecting car buyers and sellers. As a .NET full-stack developer I built backend features with ASP.NET Core and Entity Framework (search, filtering, ads), developed a dynamic UI with JavaScript, jQuery, AJAX and Bootstrap, designed the database models and optimised SQL queries, implemented authentication, roles and an admin dashboard, and integrated third-party services such as payment systems and Google Maps.",
     "technologies": [
@@ -67,19 +117,23 @@
     ]
   },
   {
-    "id": "4",
-    "order": 4,
-    "title": "Responsive Landing Page with Mailchimp Integration",
-    "description": "Designed and built a modern, fully responsive marketing landing page from design to deployment. I converted the provided Adobe XD design into a clean HTML/CSS layout, implemented all content (text, buttons, images and sections), integrated the newsletter subscription form with Mailchimp, set up hosting and deployed the live site on GoDaddy, and tested responsiveness across a range of devices. The result is a polished, lead-ready landing page that supports the client’s marketing campaigns.",
+    "id": "2",
+    "order": 6,
+    "title": "ISpro — Enterprise Resource Planning (ERP) System",
+    "description": "A 100% Ukrainian-built ERP platform covering accounting, finance, logistics, HR and compliance. As a .NET backend developer I built the backend logic for the accounting, HR and warehouse modules, developed RESTful APIs for integration with banking and government systems, optimised SQL queries and stored procedures for high performance, and refactored legacy code by migrating it to Entity Framework for better scalability.",
     "technologies": [
-      "HTML",
-      "CSS3",
-      "Adobe XD",
-      "Mailchimp",
-      "GoDaddy"
+      "C#",
+      "ASP.NET",
+      ".NET Core",
+      "SQL Server",
+      "Entity Framework",
+      "REST API",
+      "WinForms"
     ],
+    "link": "https://ispro.ua",
+    "featured": true,
     "images": [
-      "projects/coop-landing.png"
+      "projects/ispro.png"
     ]
   }
 ]
